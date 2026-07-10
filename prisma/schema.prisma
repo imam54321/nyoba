@@ -1,0 +1,71 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model DataWargaDesaMaribaya {
+  NO_ID         BigInt  @id @default(autoincrement())
+  NO_KK         BigInt?
+  NAMA_LGKP     String? @db.VarChar(36)
+  JENIS_KLMIN   String? @db.VarChar(9)
+  TMPT_LHR      String? @db.VarChar(18)
+  TGL_LHR       String? @db.VarChar(11)
+  UMUR          String? @db.VarChar(10)
+  STATUS_KAWIN  String? @db.VarChar(11)
+  STAT_HBKEL    String? @db.VarChar(15)
+  PDDK_AKH      String? @db.VarChar(32)
+  JENIS_PKRJN   String? @db.VarChar(32)
+  NAMA_LGKP_IBU String? @db.VarChar(28)
+  KEL_NAME      String? @db.VarChar(8)
+  ALAMAT        String? @db.VarChar(30)
+  NO_RT         Int?
+  NO_RW         Int?
+  EKTP_STATUS   String? @db.VarChar(11)
+  FLAG_STATUS   Int?
+  NAMA_STATUS   String? @db.VarChar(13)
+  art           String? @db.VarChar(6)
+  dtks          String? @db.VarChar(18)
+
+  @@map("data_warga_desa_maribaya")
+}
+
+model APBDES {
+  NO_ID            BigInt @id @default(autoincrement())
+
+  PEMASUKAN        Int?
+  PENGELUARAN      Int?
+  SURPLUS          Int?
+
+  PEMERINTAHAN     Int?
+  PEMBANGUNAN      Int?
+  PEMBINAAN        Int?
+  PEMBERDAYAAN     Int?
+  MENDESAK         Int?
+
+  @@map("apbdes")
+}
+
+model Admin {
+  id        Int      @id @default(autoincrement())
+  username  String   @unique @db.VarChar(50)
+  password  String   @db.VarChar(255)
+  createdAt DateTime @default(now())
+
+  @@map("admin")
+}
+
+model Berita {
+  id         BigInt   @id @default(autoincrement())
+  judul      String
+  isi        String
+  gambar     String?
+  penulis    String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@map("berita")
+}
