@@ -1,0 +1,21 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const cors_1 = __importDefault(require("cors"));
+const wargaRoute_1 = __importDefault(require("../routes/wargaRoute"));
+const pendudukRoute_1 = __importDefault(require("../routes/pendudukRoute"));
+const apbdesRoute_1 = __importDefault(require("../routes/apbdesRoute"));
+const authRoute_1 = __importDefault(require("../routes/authRoute"));
+const beritaRoute_1 = __importDefault(require("../routes/beritaRoute"));
+const app = (0, express_1.default)();
+app.use((0, cors_1.default)());
+app.use(express_1.default.json());
+app.use("/penduduk", pendudukRoute_1.default);
+app.use("/warga", wargaRoute_1.default);
+app.use("/apbdes", apbdesRoute_1.default);
+app.use("/berita", beritaRoute_1.default);
+app.use("/api/auth", authRoute_1.default);
+exports.default = app;
